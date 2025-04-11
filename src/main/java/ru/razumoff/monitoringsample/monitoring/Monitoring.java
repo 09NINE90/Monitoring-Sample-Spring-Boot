@@ -1,4 +1,4 @@
-package ru.razumoff.monitoringsample.aspect;
+package ru.razumoff.monitoringsample.monitoring;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,5 +8,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Monitoring {
-    String name();
+    MonitoringMethodType name();
 }

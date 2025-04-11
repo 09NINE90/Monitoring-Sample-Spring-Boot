@@ -1,4 +1,4 @@
-package ru.razumoff.monitoringsample.aspect;
+package ru.razumoff.monitoringsample.monitoring;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
@@ -31,13 +31,26 @@ public class MonitoringAspect {
             exceptionName = e.getClass().getSimpleName();
             throw e;
         } finally {
-            sample.stop(Timer.builder(monitoring.name())
+            sample.stop(Timer.builder(monitoring.name().getDescription())
                     .description("Time spent in method")
                     .tag("class", pjp.getTarget().getClass().getSimpleName())
                     .tag("method", pjp.getSignature().getName())
                     .tag("status", status)
                     .tag("exception", exceptionName)
                     .register(meterRegistry));
+
+            meterRegistry.counter("method.calls",
+                    "method", monitoring.name().name(),
+                    "class", pjp.getTarget().getClass().getSimpleName(),
+                    "status", status
+            ).increment();
+
+            if ("error".equals(status)) {
+                meterRegistry.counter("method.errors",
+                        "method", monitoring.name().name(),
+                        "exception", exceptionName
+                ).increment();
+            }
         }
 
     }
