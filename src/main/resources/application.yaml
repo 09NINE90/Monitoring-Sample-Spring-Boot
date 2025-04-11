@@ -1,0 +1,24 @@
+server:
+  port: 8989
+
+spring:
+  application:
+    name: MonitoringSample
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include:
+          - health
+          - prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+
