@@ -31,8 +31,9 @@ public class MonitoringAspect {
             exceptionName = e.getClass().getSimpleName();
             throw e;
         } finally {
-            sample.stop(Timer.builder(monitoring.name().getDescription())
+            sample.stop(Timer.builder(monitoring.name().getName())
                     .description("Time spent in method")
+                    .tag("description", monitoring.name().getDescription())
                     .tag("class", pjp.getTarget().getClass().getSimpleName())
                     .tag("method", pjp.getSignature().getName())
                     .tag("status", status)
@@ -40,6 +41,7 @@ public class MonitoringAspect {
                     .register(meterRegistry));
 
             meterRegistry.counter("method.calls",
+                    "description", monitoring.name().getDescription(),
                     "method", monitoring.name().name(),
                     "class", pjp.getTarget().getClass().getSimpleName(),
                     "status", status
@@ -47,6 +49,7 @@ public class MonitoringAspect {
 
             if ("error".equals(status)) {
                 meterRegistry.counter("method.errors",
+                        "description", monitoring.name().getDescription(),
                         "method", monitoring.name().name(),
                         "exception", exceptionName
                 ).increment();

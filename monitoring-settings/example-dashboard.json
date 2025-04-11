@@ -124,7 +124,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum by(method) (method_calls_total{instance=\"$instance\"})",
+          "expr": "sum by(description) (method_calls_total{instance=\"$instance\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "interval": "",
@@ -218,28 +218,35 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(Example___api_getExample_seconds_sum[1m]) / rate(Example___api_getExample_seconds_count[1m])",
+          "expr": "rate(example_method_seconds_sum[1m]) / rate(example_method_seconds_count[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "getExample",
+          "legendFormat": "get example",
           "range": true,
           "refId": "A",
           "useBackend": false
         },
         {
-          "expr": "rate(get_example_with_delay_1000_seconds_sum[1m]) / rate(get_example_with_delay_1000_seconds_count[1m])",
-          "legendFormat": "getExampleWithDelay1000",
-          "refId": "B"
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "rate(example_method_with_delay_seconds_sum[1m]) / rate(example_method_with_delay_seconds_count[1m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "get example with delay",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
         },
         {
-          "expr": "rate(get_example_with_delay_3000_seconds_sum[1m]) / rate(get_example_with_delay_3000_seconds_count[1m])",
-          "legendFormat": "getExampleWithDelay3000",
-          "refId": "C"
-        },
-        {
-          "expr": "rate(get_example_with_error_seconds_sum[1m]) / rate(get_example_with_error_seconds_count[1m])",
-          "legendFormat": "getExampleError",
-          "refId": "D"
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "rate(example_method_with_error_seconds_sum{instance=\"$instance\"}[1m]) / rate(example_method_with_error_seconds_count[1m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "get example error",
+          "range": true,
+          "refId": "D",
+          "useBackend": false
         }
       ],
       "title": "Average Execution Time (seconds)",
@@ -326,7 +333,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(Example___api_getExample_seconds_count[1m])",
+          "expr": "rate(example_method_seconds_count{instance=\"$instance\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "getExample",
@@ -337,7 +344,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(Example_with_delay_1_second___api_getExample_withDelay_1000_seconds_count[1m])",
+          "expr": "rate(example_method_with_delay_seconds_count{instance=\"$instance\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "getExampleWithDelay1000",
@@ -348,18 +355,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "rate(Example_with_delay_3_seconds___api_getExample_withDelay_3000_seconds_count[1m])",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "getExampleWithDelay3000",
-          "range": true,
-          "refId": "C",
-          "useBackend": false
-        },
-        {
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "rate(Example_return_error___api_getExample_error_seconds_count[1m])",
+          "expr": "rate(example_method_with_error_seconds_count{instance=\"$instance\"}[1m])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "getExampleError",
@@ -455,10 +451,10 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(Example___api_getExample_seconds_count{instance=\"$instance\"})",
+          "expr": "sum(example_method_seconds_count{instance=\"$instance\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "__auto",
+          "legendFormat": "example",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -470,12 +466,12 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(Example_with_delay_1_second___api_getExample_withDelay_1000_seconds_count{instance=\"$instance\"})",
+          "expr": "sum(example_method_with_delay_seconds_count{instance=\"$instance\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "example with delay",
           "range": true,
           "refId": "B",
           "useBackend": false
@@ -487,12 +483,12 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(Example_with_delay_3_seconds___api_getExample_withDelay_3000_seconds_count{instance=\"$instance\"})",
+          "expr": "sum(example_method_with_error_seconds_count{instance=\"$instance\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "example with error",
           "range": true,
           "refId": "C",
           "useBackend": false
@@ -582,11 +578,11 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "Example___api_getExample_seconds_max",
+          "expr": "example_method_seconds_max{instance=\"$instance\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "getExample",
+          "legendFormat": "get example",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -594,10 +590,10 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "Example_with_delay_1_second___api_getExample_withDelay_1000_seconds_max",
+          "expr": "example_method_with_delay_seconds_max{instance=\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "getExampleWithDelay1000",
+          "legendFormat": "get example with delay",
           "range": true,
           "refId": "B",
           "useBackend": false
@@ -605,21 +601,10 @@
         {
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "Example_with_delay_3_seconds___api_getExample_withDelay_3000_seconds_max",
+          "expr": "example_method_with_error_seconds_max{instance=\"$instance\"}",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "getExampleWithDelay3000",
-          "range": true,
-          "refId": "C",
-          "useBackend": false
-        },
-        {
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "Example_return_error___api_getExample_error_seconds_max",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "getExampleError",
+          "legendFormat": "get example error",
           "range": true,
           "refId": "D",
           "useBackend": false
@@ -808,10 +793,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "builder",
           "expr": "sum(jvm_memory_used_bytes{application=\"$application\", instance=\"$instance\", area=\"nonheap\"})*100/sum(jvm_memory_max_bytes{application=\"$application\",instance=\"$instance\", area=\"nonheap\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
+          "range": true,
           "refId": "A",
           "step": 14400
         }
@@ -3196,7 +3183,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 75
+        "y": 68
       },
       "id": 145,
       "panels": [],
@@ -3268,7 +3255,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 76
+        "y": 69
       },
       "id": 98,
       "options": {
@@ -3367,7 +3354,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 76
+        "y": 69
       },
       "id": 101,
       "options": {
@@ -3480,7 +3467,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 76
+        "y": 69
       },
       "id": 99,
       "options": {
@@ -3532,7 +3519,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 76
       },
       "id": 146,
       "panels": [],
@@ -3604,7 +3591,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 84
+        "y": 77
       },
       "id": 37,
       "options": {
@@ -3703,7 +3690,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 84
+        "y": 77
       },
       "id": 38,
       "options": {
@@ -3746,7 +3733,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 91
+        "y": 84
       },
       "id": 147,
       "panels": [],
@@ -3766,7 +3753,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 85
       },
       "id": 131,
       "maxPerRow": 3,
@@ -3903,12 +3890,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "MonitoringSampleApplicationTests",
   "uid": "eeik7l5xy9czkf",
-  "version": 12
+  "version": 20
 }

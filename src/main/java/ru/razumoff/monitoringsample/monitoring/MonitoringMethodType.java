@@ -7,15 +7,19 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MonitoringMethodType {
     EXAMPLE_METHOD(
-            "Example: /api/getExample"
+            "example method",
+            "Пример метода: /api/getExample"
     ),
     EXAMPLE_METHOD_WITH_DELAY(
-            "Example with delay: /api/getExample/withDelay/{delay}"
+            "example method with delay",
+            "Метод с задержкой: /api/getExample/withDelay/{delay}"
     ),
     EXAMPLE_METHOD_WITH_ERROR(
-            "Example return error: /api/getExample/error"
+            "example method with error",
+            "Метод возвращает ошибку: /api/getExample/error"
     );
 
+    private final String name;
     private final String description;
 
 }
