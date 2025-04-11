@@ -75,6 +75,6 @@
 ```
 ab.exe -k -c 5 -n 20000 'http://localhost:8989/api/getExample' & \
 ab.exe -k -c 5 -n 2000 ' http://localhost:8989/api/getExample/error' & \
-ab.exe -k -c 50 -n 5000 'http://localhost:8989/api/getExample/withDelay/1000' & \
-ab.exe -k -c 50 -n 2000 'http://localhost:8989/api/getExample/withDelay/3000'
+ab.exe -k -c 50 -n 5000 'http://localhost:8989/api/getExample/withDelay/1' & \
+ab.exe -k -c 50 -n 2000 'http://localhost:8989/api/getExample/withDelay/3'
 ```

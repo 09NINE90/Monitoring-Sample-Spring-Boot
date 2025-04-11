@@ -12,24 +12,14 @@ public class SampleService {
         return "Sample Service";
     }
 
-    @Monitoring(name = MonitoringMethodType.EXAMPLE_METHOD_WITH_DELAY_1000)
-    public String getExampleWithDelay1000() {
+    @Monitoring(name = MonitoringMethodType.EXAMPLE_METHOD_WITH_DELAY)
+    public String getExampleWithDelay(int delay) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(delay * 1000L);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return "Delayed response (1 seconds)";
-    }
-
-    @Monitoring(name = MonitoringMethodType.EXAMPLE_METHOD_WITH_DELAY_3000)
-    public String getExampleWithDelay3000() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        return "Delayed response (3 seconds)";
+        return String.format("Delayed response (%d seconds)", delay);
     }
 
     @Monitoring(name = MonitoringMethodType.EXAMPLE_METHOD_WITH_ERROR)
